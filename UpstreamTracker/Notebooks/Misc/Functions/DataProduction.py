@@ -1,17 +1,17 @@
 import pandas as pd
 
 #Importing Pickles
-translator_=pd.read_pickle('/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTCalibrationMaterials/translator.pkl')
-map_ = pd.read_pickle('/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTCalibrationMaterials/universal_map.pkl')
+translator_=pd.read_pickle('/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/Pickles/translator.pkl')
+map_ = pd.read_pickle('/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/Pickles/universal_map.pkl')
 
 #Translator - Pickle to DataFrames
-data_dict=pd.read_pickle('/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTCalibrationMaterials/translator.pkl')
+data_dict=pd.read_pickle('/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/Pickles/translator.pkl')
 translator_=pd.DataFrame.from_dict(data_dict,orient='index').reset_index()
 translator_.columns=['ChannelID','ChipID']
 
 
 #UniversalMapping - Pickeles to DataFrame
-data_dict=pd.read_pickle('/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTCalibrationMaterials/universal_map.pkl')
+data_dict=pd.read_pickle('/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/Pickles/universal_map.pkl')
 universal_map_=pd.DataFrame.from_dict(data_dict,orient='index').reset_index()[['index','sensor_type']]
 universal_map_.columns=['ChipID','SensorType']
 universal_map_[['Sector','ChipID']]=universal_map_['ChipID'].str.rsplit('.',n=1,expand=True)
@@ -24,9 +24,9 @@ class dataProd():
     
     
     def singleRun(self,file):
-        cms=pd.read_csv(r'/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTData/UTData3/CMS_noise_0000{}.csv'.format(file),names=['ChannelID','Signal','CMSubstracted','Int']).drop(['Int'],axis=1)
-        cm=pd.read_csv(r'/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTData/UTData3/commonMode_0000{}.csv'.format(file),names=['ChipID','ChipMean','ChipSigma','Int']).drop(['Int'],axis=1)
-        pedastals=pd.read_csv(r'/Users/sabinhashmi/Drive/Projects/Upstream Tracker Calibration/UTData/UTData3/pedestals_0000{}.csv'.format(file),names=['ChannelID','PedestalValue','Int']).drop(['Int'],axis=1)
+        cms=pd.read_csv(r'/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/UTData/CMS_noise_0000{}.csv'.format(file),names=['ChannelID','Signal','CMSubstracted','Int']).drop(['Int'],axis=1)
+        cm=pd.read_csv(r'/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/UTData/commonMode_0000{}.csv'.format(file),names=['ChipID','ChipMean','ChipSigma','Int']).drop(['Int'],axis=1)
+        pedastals=pd.read_csv(r'/home/hashmi/SharedDisk/WorkSpace/UpstreamTracker/UTData/pedestals_0000{}.csv'.format(file),names=['ChannelID','PedestalValue','Int']).drop(['Int'],axis=1)
         
 
 
