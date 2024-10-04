@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 sns.set(rc = {'figure.figsize':(15, 5)})
 
 class overlappingPlots():
@@ -34,12 +35,13 @@ class overlappingPlots():
         self.data3['PedestalValue'].plot(kind='line')
 
 class splitPlots:
-    def __init__(self, data1, data2, data3):
+    def __init__(self, data1, data2, data3,file_path=None):
         self.data1=data1
         self.data2=data2
         self.data3=data3
+        self.file_path = file_path
 
-    def histogram(self):
+    def histogram(self,plot_name='NoFileName'):
         plt.figure(figsize=(15, 5))
 
         plt.subplot(1, 3, 1)
@@ -55,9 +57,15 @@ class splitPlots:
         plt.title(self.data3['RunNumber'].unique())
 
         plt.tight_layout()
+        
+        if self.file_path:
+            
+            os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+            plt.savefig(os.path.join(self.file_path, f"{plot_name}.png"))
+
         plt.show()
 
-    def boxplot(self):
+    def boxplot(self,plot_name='NoFileName'):
         plt.figure(figsize=(15, 5))
 
         plt.subplot(1, 3, 1)
@@ -73,6 +81,11 @@ class splitPlots:
         plt.title(self.data3['RunNumber'].unique())
 
         plt.tight_layout()
+        if self.file_path:
+            
+            os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+            plt.savefig(os.path.join(self.file_path, f"{plot_name}.png"))
+
         plt.show()
 
 
